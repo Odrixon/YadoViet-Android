@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+
+<html class="light" lang="vi">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>YadoViet - Welcome</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-background": "#181c1e",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "error": "#ba1a1a",
+                        "primary": "#004bca",
+                        "secondary": "#006684",
+                        "on-tertiary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "surface-container-lowest": "#ffffff",
+                        "outline": "#737687",
+                        "on-tertiary-fixed": "#410004",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "on-error": "#ffffff",
+                        "tertiary": "#ae091d",
+                        "on-secondary": "#ffffff",
+                        "on-secondary-fixed": "#001f2a",
+                        "tertiary-fixed-dim": "#ffb3ae",
+                        "surface-bright": "#f7fafd",
+                        "on-primary-container": "#f1f2ff",
+                        "on-secondary-container": "#00526a",
+                        "surface-container-low": "#f1f4f7",
+                        "surface-container-highest": "#e0e3e6",
+                        "on-tertiary-container": "#ffefee",
+                        "surface": "#f7fafd",
+                        "secondary-container": "#25caff",
+                        "error-container": "#ffdad6",
+                        "inverse-primary": "#b4c5ff",
+                        "on-primary-fixed": "#00174b",
+                        "surface-tint": "#0052dc",
+                        "on-surface-variant": "#424656",
+                        "primary-container": "#0061ff",
+                        "surface-container": "#ebeef1",
+                        "outline-variant": "#c2c6d9",
+                        "inverse-on-surface": "#eef1f4",
+                        "on-tertiary-fixed-variant": "#930014",
+                        "surface-dim": "#d7dadd",
+                        "primary-fixed": "#dbe1ff",
+                        "on-secondary-fixed-variant": "#004d64",
+                        "on-primary": "#ffffff",
+                        "tertiary-fixed": "#ffdad7",
+                        "surface-container-high": "#e5e8eb",
+                        "secondary-fixed": "#bde9ff",
+                        "on-surface": "#181c1e",
+                        "secondary-fixed-dim": "#67d3ff",
+                        "surface-variant": "#e0e3e6",
+                        "background": "#f7fafd",
+                        "tertiary-container": "#d22c32",
+                        "inverse-surface": "#2d3133"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "md": "16px",
+                        "xs": "8px",
+                        "xl": "32px",
+                        "base": "4px",
+                        "lg": "24px",
+                        "gutter": "12px",
+                        "margin-mobile": "16px",
+                        "sm": "12px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Hanken Grotesk"],
+                        "label-md": ["Hanken Grotesk"],
+                        "headline-lg": ["Hanken Grotesk"],
+                        "body-lg": ["Hanken Grotesk"],
+                        "headline-md": ["Hanken Grotesk"],
+                        "body-md": ["Hanken Grotesk"],
+                        "headline-lg-mobile": ["Hanken Grotesk"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["10px", { "lineHeight": "12px", "fontWeight": "600" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500" }],
+                        "headline-lg": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "500" }],
+                        "headline-md": ["18px", { "lineHeight": "24px", "fontWeight": "600" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["20px", { "lineHeight": "28px", "fontWeight": "700" }]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Hanken Grotesk', sans-serif;
+            background-color: #f7fafd;
+            overflow: hidden;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .glass-effect {
+            backdrop-filter: blur(12px);
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        .bounce-subtle {
+            animation: bounce-subtle 3s ease-in-out infinite;
+        }
+
+        @keyframes bounce-subtle {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
+<body class="flex flex-col h-screen w-full">
+    <!-- Top Section (60% Height) - Immersive Illustration -->
+    <div class="relative h-[60%] w-full overflow-hidden flex items-center justify-center bg-primary-fixed">
+        <!-- Background Decorative Elements -->
+        <div class="absolute inset-0 opacity-20 pointer-events-none">
+            <div class="absolute top-[-10%] left-[-10%] w-64 h-64 rounded-full bg-primary-container blur-3xl"></div>
+            <div class="absolute bottom-[-5%] right-[-5%] w-96 h-96 rounded-full bg-secondary-container blur-3xl"></div>
+        </div>
+        <!-- Hero Illustration -->
+        <div class="relative z-10 w-full h-full max-w-lg mx-auto flex items-center justify-center p-xl bounce-subtle">
+            <div class="w-full h-full relative">
+                <img class="w-full h-full object-contain"
+                    data-alt="A high-quality 3D minimalist architectural rendering of a modern white apartment complex with large glass windows and vibrant blue accents. The style is clean, corporate modern, and sleek, typical of high-end real estate software. The lighting is soft morning sunlight, creating gentle shadows on the building's facade, set against a pristine, clear light blue background that matches a professional financial app aesthetic."
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuBamrujusPhrmF2nUgQ0_KFZJYv8fhpW71Kw8Ngf5JolTNjARur8O2WZNl1JoRwLlNt2UjhMfCjy4-tyg9x-hdEjInRXAYNHQk9z2yKadXnCYhnKxua89rNIHwWQmBvk3S3l2ZWs3lakPiT6cZnMOlCbUereEiuhsCayZwPfZ-PgDxxtsbTtLAehNBTPxOq7Ck-T7X0CigIIgbWUWyJ6N-MQlAFv6YW2x3BOGwbOplewySLGdnUuLBEJY_TdeW6HrUooIq9vPemREs" />
+            </div>
+        </div>
+        <!-- Floating Logo/Identity -->
+        <div class="absolute top-lg left-margin-mobile z-20 flex items-center gap-xs">
+            <div class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center shadow-lg">
+                <span class="material-symbols-outlined text-white"
+                    style="font-variation-settings: 'FILL' 1;">apartment</span>
+            </div>
+            <span class="font-headline-lg-mobile text-headline-lg-mobile text-primary tracking-tight">YadoViet</span>
+        </div>
+    </div>
+    <!-- Bottom Section (40% Height) - Action Container -->
+    <div
+        class="relative h-[40%] w-full bg-surface-container-lowest rounded-t-[32px] shadow-[0_-8px_40px_rgba(0,0,0,0.08)] z-30 px-margin-mobile pt-xl flex flex-col justify-between pb-8">
+        <!-- Welcome Text Content -->
+        <div class="text-center space-y-sm">
+            <h1 class="font-headline-lg text-headline-lg text-on-surface">
+                Chào mừng bạn đến với YadoViet
+            </h1>
+            <p class="font-body-md text-body-md text-on-surface-variant max-w-[85%] mx-auto leading-relaxed">
+                Giải pháp quản lý nhà trọ toàn diện và thông minh cho chủ trọ thế hệ mới.
+            </p>
+        </div>
+        <!-- Action Buttons Cluster -->
+        <div class="space-y-sm w-full">
+            <button
+                class="w-full bg-primary text-on-primary py-4 px-lg rounded-xl font-body-lg text-body-lg flex items-center justify-center gap-xs shadow-md transition-all active:scale-95 hover:bg-primary-container hover:text-on-primary-container"
+                onclick="handleInteraction(this)">
+                Đăng nhập
+                <span class="material-symbols-outlined text-[20px]">login</span>
+            </button>
+            <button
+                class="w-full bg-transparent border-2 border-primary/20 text-primary py-4 px-lg rounded-xl font-body-lg text-body-lg flex items-center justify-center gap-xs transition-all active:scale-95 hover:bg-primary-fixed/30"
+                onclick="handleInteraction(this)">
+                Đăng ký tài khoản
+                <span class="material-symbols-outlined text-[20px]">person_add</span>
+            </button>
+        </div>
+        <!-- Footer Identity -->
+        <div class="flex flex-col items-center gap-base">
+            <div class="h-[1px] w-12 bg-outline-variant opacity-30 mb-2"></div>
+            <p class="font-label-sm text-label-sm text-outline flex items-center gap-1 uppercase tracking-widest">
+                Powered by <span class="font-bold text-primary">YadoViet</span>
+            </p>
+            <!-- Language Selector (Visual only) -->
+            <div class="flex gap-md mt-sm">
+                <span class="font-label-md text-label-md text-primary underline underline-offset-4 cursor-pointer">Tiếng
+                    Việt</span>
+                <span
+                    class="font-label-md text-label-md text-on-surface-variant cursor-pointer opacity-60">English</span>
+            </div>
+        </div>
+    </div>
+    <!-- Micro-interaction Script -->
+    <script>
+        function handleInteraction(el) {
+            // Ripple-like effect or simple feedback
+            console.log('Button clicked:', el.innerText.trim());
+            el.classList.add('opacity-80');
+            setTimeout(() => el.classList.remove('opacity-80'), 150);
+        }
+
+        // Entrance animation
+        window.addEventListener('DOMContentLoaded', () => {
+            const bottomSheet = document.querySelector('.rounded-t-\\[32px\\]');
+            bottomSheet.style.transform = 'translateY(100%)';
+            bottomSheet.style.transition = 'transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1)';
+
+            requestAnimationFrame(() => {
+                bottomSheet.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
+</body>
+
+</html>
