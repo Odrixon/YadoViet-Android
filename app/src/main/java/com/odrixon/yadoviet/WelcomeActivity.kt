@@ -1,11 +1,11 @@
 package com.odrixon.yadoviet
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import com.odrixon.yadoviet.ui.screens.WelcomeScreen
 import com.odrixon.yadoviet.ui.theme.YadoVietTheme
+import com.odrixon.yadoviet.utils.startActivityNoAnimation
 
 class WelcomeActivity : ComponentActivity() {
 
@@ -16,12 +16,10 @@ class WelcomeActivity : ComponentActivity() {
             YadoVietTheme {
                 WelcomeScreen(
                     onLoginClick = {
-                        startActivity(Intent(this, LoginActivity::class.java))
-                        overridePendingTransition(0, 0)
+                        startActivityNoAnimation<LoginActivity>()
                     },
                     onRegisterClick = {
-                        startActivity(Intent(this, RegisterActivity::class.java))
-                        overridePendingTransition(0, 0)
+                        startActivityNoAnimation<RegisterActivity>()
                     }
                 )
             }

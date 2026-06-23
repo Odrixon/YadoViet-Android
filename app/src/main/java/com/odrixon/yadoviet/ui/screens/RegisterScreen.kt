@@ -199,7 +199,7 @@ fun RegisterScreen(
                         text = buildAnnotatedString {
                             append("Tôi đồng ý với ")
                             withStyle(SpanStyle(fontWeight = FontWeight.Bold, color = Primary)) {
-                                append("điều khoản")
+                                append("thỏa thuận người dùng")
                             }
                             append(" và ")
                             withStyle(SpanStyle(fontWeight = FontWeight.Bold, color = Primary)) {

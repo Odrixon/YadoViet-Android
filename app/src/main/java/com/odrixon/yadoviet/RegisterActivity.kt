@@ -1,12 +1,13 @@
 package com.odrixon.yadoviet
 
-import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import com.odrixon.yadoviet.ui.screens.RegisterScreen
 import com.odrixon.yadoviet.ui.theme.YadoVietTheme
+import com.odrixon.yadoviet.utils.finishNoAnimation
+import com.odrixon.yadoviet.utils.startActivityAndFinishNoAnimation
 
 class RegisterActivity : ComponentActivity() {
 
@@ -17,13 +18,10 @@ class RegisterActivity : ComponentActivity() {
             YadoVietTheme {
                 RegisterScreen(
                     onBackClick = {
-                        finish()
-                        overridePendingTransition(0, 0)
+                        finishNoAnimation()
                     },
                     onLoginClick = {
-                        startActivity(Intent(this, LoginActivity::class.java))
-                        overridePendingTransition(0, 0)
-                        finish()
+                        startActivityAndFinishNoAnimation<LoginActivity>()
                     },
                     onRegisterClick = { fullName, phone ->
                         Toast.makeText(

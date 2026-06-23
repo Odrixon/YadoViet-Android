@@ -1,11 +1,12 @@
 package com.odrixon.yadoviet
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import com.odrixon.yadoviet.ui.screens.ForgetPasswordScreen
 import com.odrixon.yadoviet.ui.theme.YadoVietTheme
+import com.odrixon.yadoviet.utils.finishNoAnimation
+import com.odrixon.yadoviet.utils.startActivityNoAnimation
 
 class ForgetPasswordActivity : ComponentActivity() {
 
@@ -16,15 +17,12 @@ class ForgetPasswordActivity : ComponentActivity() {
             YadoVietTheme {
                 ForgetPasswordScreen(
                     onBackClick = {
-                        finish()
-                        overridePendingTransition(0, 0)
+                        finishNoAnimation()
                     },
                     onSendOtpClick = { phone ->
-                        val intent = Intent(this, OtpActivity::class.java).apply {
+                        startActivityNoAnimation<OtpActivity> {
                             putExtra("EXTRA_PHONE", phone)
                         }
-                        startActivity(intent)
-                        overridePendingTransition(0, 0)
                     }
                 )
             }

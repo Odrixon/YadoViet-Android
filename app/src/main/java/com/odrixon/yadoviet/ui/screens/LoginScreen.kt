@@ -289,13 +289,13 @@ fun LoginScreen(
                 text = androidx.compose.ui.text.buildAnnotatedString {
                     append("Khi đăng ký trên YadoViet, bạn đã đồng ý với các ")
                     withStyle(
-                        style = androidx.compose.ui.text.SpanStyle(fontWeight = FontWeight.Bold)
+                        style = androidx.compose.ui.text.SpanStyle(fontWeight = FontWeight.Bold, color = Primary)
                     ) {
                         append("thỏa thuận người dùng")
                     }
                     append(" và ")
                     withStyle(
-                        style = androidx.compose.ui.text.SpanStyle(fontWeight = FontWeight.Bold)
+                        style = androidx.compose.ui.text.SpanStyle(fontWeight = FontWeight.Bold, color = Primary)
                     ) {
                         append("chính sách bảo mật")
                     }

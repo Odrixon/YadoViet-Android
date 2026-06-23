@@ -6,6 +6,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import com.odrixon.yadoviet.ui.screens.OtpScreen
 import com.odrixon.yadoviet.ui.theme.YadoVietTheme
+import com.odrixon.yadoviet.utils.finishNoAnimation
 
 class OtpActivity : ComponentActivity() {
 
@@ -19,14 +20,12 @@ class OtpActivity : ComponentActivity() {
                 OtpScreen(
                     phone = phone,
                     onBackClick = {
-                        finish()
-                        overridePendingTransition(0, 0)
+                        finishNoAnimation()
                     },
                     onConfirmClick = { otpCode ->
                         Toast.makeText(this, "Xác minh mã OTP $otpCode thành công!", Toast.LENGTH_LONG).show()
                         // In a real app, navigate to reset password page
-                        finish()
-                        overridePendingTransition(0, 0)
+                        finishNoAnimation()
                     }
                 )
             }
