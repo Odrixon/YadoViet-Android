@@ -48,6 +48,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -56,6 +57,11 @@ import androidx.compose.ui.viewinterop.AndroidView
 import com.odrixon.yadoviet.ui.theme.BrandPrimary
 import com.odrixon.yadoviet.ui.theme.TextPrimary
 import com.odrixon.yadoviet.ui.theme.TextSecondary
+
+import android.app.Activity
+import androidx.compose.runtime.SideEffect
+import androidx.compose.ui.platform.LocalView
+import androidx.core.view.WindowCompat
 
 @SuppressLint("SetJavaScriptEnabled")
 @Composable
@@ -66,12 +72,27 @@ fun WebManageScreen(
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
+    val view = LocalView.current
     var webView: WebView? by remember { mutableStateOf(null) }
     var progress by remember { mutableFloatStateOf(0f) }
     var isLoading by remember { mutableStateOf(true) }
     var showMenu by remember { mutableStateOf(false) }
     var currentUrl by remember { mutableStateOf(initialUrl) }
     var hasError by remember { mutableStateOf(false) }
+
+    // Dynamic Status Bar & Container Background Color (Default: #F1F5F9 for manage, #FFFFFF for terms/privacy)
+    val defaultBgColor = if (initialUrl.contains("/manage/")) Color(0xFFF1F5F9) else Color.White
+    var statusBarColor by remember { mutableStateOf(defaultBgColor) }
+
+    // SideEffect to sync Android System Status Bar color dynamically with Web Background
+    val window = (view.context as? Activity)?.window
+    SideEffect {
+        if (window != null) {
+            window.statusBarColor = statusBarColor.toArgb()
+            val insetsController = WindowCompat.getInsetsController(window, view)
+            insetsController.isAppearanceLightStatusBars = true
+        }
+    }
 
     val customUserAgent = "Mozilla/5.0 (Linux; Android 13; SM-G998B Build/TP1A.220624.014; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/115.0.5790.166 Mobile Safari/537.36 YadoVietApp/8.10.0 YadoVietTheme/light"
 
@@ -86,7 +107,7 @@ fun WebManageScreen(
     Box(
         modifier = modifier
             .fillMaxSize()
-            .background(Color.White)
+            .background(statusBarColor)
             .statusBarsPadding()
     ) {
         // Main Fullscreen WebView
@@ -98,6 +119,7 @@ fun WebManageScreen(
                         ViewGroup.LayoutParams.MATCH_PARENT
                     )
 
+                    overScrollMode = WebView.OVER_SCROLL_NEVER
                     settings.apply {
                         javaScriptEnabled = true
                         domStorageEnabled = true
@@ -119,7 +141,7 @@ fun WebManageScreen(
                         setAcceptThirdPartyCookies(webViewInstance, true)
                     }
 
-                    // JavaScript Bridge to receive instant loading state & retry action
+                    // JavaScript Bridge to receive instant loading state, status bar color & retry action
                     addJavascriptInterface(object {
                         @JavascriptInterface
                         fun onLoadingStateChange(state: String) {
@@ -128,6 +150,17 @@ fun WebManageScreen(
                                     isLoading = false
                                 } else if (state == "loading_start") {
                                     isLoading = true
+                                }
+                            }
+                        }
+
+                        @JavascriptInterface
+                        fun setStatusBarColor(colorHex: String) {
+                            post {
+                                try {
+                                    statusBarColor = Color(android.graphics.Color.parseColor(colorHex))
+                                } catch (e: Exception) {
+                                    // ignore invalid hex
                                 }
                             }
                         }
