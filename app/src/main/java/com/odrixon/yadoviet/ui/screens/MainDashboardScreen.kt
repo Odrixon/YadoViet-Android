@@ -63,9 +63,11 @@ import com.odrixon.yadoviet.ui.theme.TextSecondary
 
 @Composable
 fun MainDashboardScreen(
+    onNavigateToBranch: () -> Unit = {},
     onNavigateToRooms: () -> Unit = {},
     onNavigateToInvoices: () -> Unit = {},
-    onNavigateToAccount: () -> Unit = {},
+    onNavigateToProfile: () -> Unit = {},
+    onNavigateToWeb: (String, String) -> Unit = { _, _ -> },
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
@@ -80,7 +82,7 @@ fun MainDashboardScreen(
                     when (tabIndex) {
                         1 -> onNavigateToRooms()
                         2 -> onNavigateToInvoices()
-                        3 -> onNavigateToAccount()
+                        3 -> onNavigateToProfile()
                     }
                 },
                 onQrClick = {
@@ -219,7 +221,17 @@ fun MainDashboardScreen(
                 // ==================== 4. QUICK ACTIONS GRID (2x4) ====================
                 QuickActionsGrid(
                     onActionClick = { actionName ->
-                        Toast.makeText(context, "Mở mục: $actionName", Toast.LENGTH_SHORT).show()
+                        when (actionName) {
+                            "Chi nhánh" -> onNavigateToBranch()
+                            "Hợp đồng" -> onNavigateToWeb("http://localhost:3000/manage/contract", "Hợp đồng")
+                            "Tài khoản" -> onNavigateToWeb("http://localhost:3000/manage/bank", "Tài khoản")
+                            "Điện nước" -> onNavigateToWeb("http://localhost:3000/manage/utility", "Điện nước")
+                            "Lưu trú" -> onNavigateToWeb("http://localhost:3000/manage/tenant", "Lưu trú")
+                            "Thu chi" -> onNavigateToWeb("http://localhost:3000/manage/expense", "Thu chi")
+                            "Báo cáo" -> onNavigateToWeb("http://localhost:3000/manage/report", "Báo cáo")
+                            "Khác" -> onNavigateToProfile()
+                            else -> Toast.makeText(context, "Mở mục: $actionName", Toast.LENGTH_SHORT).show()
+                        }
                     }
                 )
 

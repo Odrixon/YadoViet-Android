@@ -99,10 +99,10 @@ fun MainBottomNavigation(
                     modifier = Modifier.weight(1f)
                 )
 
-                // Tab 3: Tài khoản
+                // Tab 3: Quản lý (Profile/Setting)
                 BottomNavCanvasItem(
                     icon = { isSel -> AccountNavIcon(isSelected = isSel) },
-                    label = "Tài khoản",
+                    label = "Quản lý",
                     isSelected = selectedTab == 3,
                     onClick = { onTabSelected(3) },
                     modifier = Modifier.weight(1f)

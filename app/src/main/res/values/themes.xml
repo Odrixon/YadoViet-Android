@@ -9,8 +9,12 @@
         <item name="colorSecondary">@color/primary_light</item>
         <item name="colorSecondaryVariant">@color/primary_variant</item>
         <item name="colorOnSecondary">@color/on_surface</item>
-        <!-- Status bar color. -->
-        <item name="android:statusBarColor">@color/primary_variant</item>
+        <!-- Status bar color: White with dark icons -->
+        <item name="android:statusBarColor">#FFFFFF</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <!-- Navigation bar color -->
+        <item name="android:navigationBarColor">#FFFFFF</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
         <!-- Disable activity transition animations -->
         <item name="android:windowAnimationStyle">@style/WindowNoAnim</item>
     </style>
