@@ -51,6 +51,8 @@ import com.odrixon.yadoviet.ui.theme.TextSecondary
 fun WelcomeScreen(
     onLoginClick: () -> Unit,
     onRegisterClick: () -> Unit,
+    onTermsClick: () -> Unit = {},
+    onPrivacyClick: () -> Unit = {},
     modifier: Modifier = Modifier
 ) {
     Box(
@@ -246,13 +248,15 @@ fun WelcomeScreen(
                 )
                 Row(
                     modifier = Modifier.padding(top = 2.dp),
-                    horizontalArrangement = Arrangement.Center
+                    horizontalArrangement = Arrangement.Center,
+                    verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(
                         text = "Điều khoản sử dụng",
                         color = BrandPrimary,
                         fontSize = 11.5.sp,
-                        fontWeight = FontWeight.Bold
+                        fontWeight = FontWeight.Bold,
+                        modifier = Modifier.clickable { onTermsClick() }
                     )
                     Text(
                         text = " và ",
@@ -263,7 +267,8 @@ fun WelcomeScreen(
                         text = "Chính sách bảo mật",
                         color = BrandPrimary,
                         fontSize = 11.5.sp,
-                        fontWeight = FontWeight.Bold
+                        fontWeight = FontWeight.Bold,
+                        modifier = Modifier.clickable { onPrivacyClick() }
                     )
                 }
             }

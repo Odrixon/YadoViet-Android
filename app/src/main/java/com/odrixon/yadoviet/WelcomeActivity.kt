@@ -20,6 +20,18 @@ class WelcomeActivity : ComponentActivity() {
                     },
                     onRegisterClick = {
                         startActivityNoAnimation<RegisterActivity>()
+                    },
+                    onTermsClick = {
+                        startActivityNoAnimation<WebManageActivity> {
+                            putExtra("EXTRA_URL", "http://localhost:3000/terms")
+                            putExtra("EXTRA_TITLE", "Điều khoản sử dụng")
+                        }
+                    },
+                    onPrivacyClick = {
+                        startActivityNoAnimation<WebManageActivity> {
+                            putExtra("EXTRA_URL", "http://localhost:3000/privacy")
+                            putExtra("EXTRA_TITLE", "Chính sách bảo mật")
+                        }
                     }
                 )
             }
