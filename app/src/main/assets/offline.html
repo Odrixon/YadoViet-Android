@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>YadoViet - Mất kết nối</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        html, body {
+            width: 100%;
+            height: 100%;
+            background-color: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            user-select: none;
+            overflow: hidden;
+        }
+        .container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 24px;
+            text-align: center;
+        }
+        .icon-circle {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            background-color: #FEF2F2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 14px rgba(239, 68, 68, 0.12);
+        }
+        .icon-circle svg {
+            width: 36px;
+            height: 36px;
+            color: #EF4444;
+        }
+        .title {
+            font-size: 19px;
+            font-weight: 800;
+            color: #1E293B;
+            margin-bottom: 8px;
+            letter-spacing: -0.3px;
+        }
+        .desc {
+            font-size: 13.5px;
+            color: #64748B;
+            line-height: 1.5;
+            max-width: 320px;
+            margin-bottom: 24px;
+        }
+        .retry-btn {
+            background-color: #032C95;
+            color: #ffffff;
+            border: none;
+            border-radius: 20px;
+            padding: 12px 28px;
+            font-size: 14.5px;
+            font-weight: 700;
+            cursor: pointer;
+            outline: none;
+            box-shadow: 0 4px 14px rgba(3, 44, 149, 0.25);
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .retry-btn:active {
+            transform: scale(0.96);
+            background-color: #02206B;
+        }
+        .retry-btn svg {
+            width: 16px;
+            height: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="icon-circle">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M18.364 5.636a9 9 0 010 12.728m0 0l-2.829-2.829m2.829 2.829L21 21M15.536 8.464a5 5 0 010 7.072m0 0l-2.829-2.829m-4.243 4.243a9 9 0 01-12.728 0m0 0l2.829-2.829m-2.829 2.829L3 21m2.829-5.657a5 5 0 010-7.072m0 0l2.829 2.829m4.243-4.243L12 3m0 0l2.828 2.828M12 3L9.172 5.828"></path>
+            </svg>
+        </div>
+        <h1 class="title">Không thể kết nối máy chủ</h1>
+        <p class="desc">Vui lòng kiểm tra kết nối mạng Wi-Fi/4G hoặc đảm bảo máy chủ frontend đang hoạt động.</p>
+        <button class="retry-btn" onclick="retryConnection()">
+            <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+            </svg>
+            <span>Thử lại</span>
+        </button>
+    </div>
+
+    <script>
+        function retryConnection() {
+            if (window.YadoVietNative && window.YadoVietNative.reloadPage) {
+                window.YadoVietNative.reloadPage();
+            } else {
+                window.location.reload();
+            }
+        }
+    </script>
+</body>
+</html>

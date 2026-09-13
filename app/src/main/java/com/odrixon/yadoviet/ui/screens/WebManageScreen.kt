@@ -119,17 +119,25 @@ fun WebManageScreen(
                         setAcceptThirdPartyCookies(webViewInstance, true)
                     }
 
-                    // JavaScript Bridge to receive instant loading state from Vue/Nuxt
+                    // JavaScript Bridge to receive instant loading state & retry action
                     addJavascriptInterface(object {
                         @JavascriptInterface
                         fun onLoadingStateChange(state: String) {
                             post {
                                 if (state == "web_ready" || state == "loading_finish") {
-                                    // Web loading is active/rendered on screen -> hide native layer seamlessly
                                     isLoading = false
                                 } else if (state == "loading_start") {
                                     isLoading = true
                                 }
+                            }
+                        }
+
+                        @JavascriptInterface
+                        fun reloadPage() {
+                            post {
+                                hasError = false
+                                isLoading = true
+                                loadUrl(initialUrl)
                             }
                         }
                     }, "YadoVietNative")
@@ -148,17 +156,22 @@ fun WebManageScreen(
 
                     webViewClient = object : WebViewClient() {
                         override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
-                            isLoading = true
-                            hasError = false
-                            url?.let { currentUrl = it }
+                            if (url?.startsWith("file:///android_asset") != true) {
+                                isLoading = true
+                                hasError = false
+                                url?.let { currentUrl = it }
+                            }
                         }
 
                         override fun onPageFinished(view: WebView?, url: String?) {
-                            url?.let { currentUrl = it }
-                            // Backup fallback delay after page completely finishes
-                            postDelayed({
+                            if (url?.startsWith("file:///android_asset") != true) {
+                                url?.let { currentUrl = it }
+                                postDelayed({
+                                    isLoading = false
+                                }, 800)
+                            } else {
                                 isLoading = false
-                            }, 800)
+                            }
                         }
 
                         override fun onReceivedError(
@@ -169,6 +182,8 @@ fun WebManageScreen(
                             if (request?.isForMainFrame == true) {
                                 isLoading = false
                                 hasError = true
+                                // Load offline.html asset directly into the WebView
+                                view?.loadUrl("file:///android_asset/offline.html")
                             }
                         }
 
@@ -306,51 +321,6 @@ fun WebManageScreen(
                         onCloseClick()
                     }
                 )
-            }
-        }
-
-        // Error Recovery Overlay Screen if server connection fails
-        if (hasError) {
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .background(Color.White)
-                    .padding(24.dp),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
-            ) {
-                Text(
-                    text = "Không thể kết nối máy chủ",
-                    fontSize = 18.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = TextPrimary
-                )
-                Spacer(modifier = Modifier.height(8.dp))
-                Text(
-                    text = "Vui lòng kiểm tra lệnh npm run dev trên máy tính hoặc kết nối chung mạng Wi-Fi.",
-                    fontSize = 13.sp,
-                    color = TextSecondary,
-                    textAlign = androidx.compose.ui.text.style.TextAlign.Center
-                )
-                Spacer(modifier = Modifier.height(18.dp))
-                Box(
-                    modifier = Modifier
-                        .clip(RoundedCornerShape(20.dp))
-                        .background(BrandPrimary)
-                        .clickable {
-                            hasError = false
-                            isLoading = true
-                            webView?.reload()
-                        }
-                        .padding(horizontal = 20.dp, vertical = 10.dp)
-                ) {
-                    Text(
-                        text = "Thử lại",
-                        color = Color.White,
-                        fontSize = 14.sp,
-                        fontWeight = FontWeight.Bold
-                    )
-                }
             }
         }
     }
