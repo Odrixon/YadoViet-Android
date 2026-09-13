@@ -28,6 +28,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -72,33 +73,48 @@ fun MainDashboardScreen(
 ) {
     val context = LocalContext.current
     var selectedTab by remember { mutableIntStateOf(0) }
+    var isScanningQr by remember { mutableStateOf(false) }
 
-    Scaffold(
-        bottomBar = {
-            MainBottomNavigation(
-                selectedTab = selectedTab,
-                onTabSelected = { tabIndex ->
-                    selectedTab = tabIndex
-                    when (tabIndex) {
-                        1 -> onNavigateToRooms()
-                        2 -> onNavigateToInvoices()
-                        3 -> onNavigateToProfile()
-                    }
-                },
-                onQrClick = {
-                    Toast.makeText(context, "Mở trình quét mã QR", Toast.LENGTH_SHORT).show()
+    if (isScanningQr) {
+        QrScannerScreen(
+            onQrScanned = { result ->
+                isScanningQr = false
+                Toast.makeText(context, "Đã quét thành công: $result", Toast.LENGTH_LONG).show()
+                if (result.startsWith("http://") || result.startsWith("https://")) {
+                    onNavigateToWeb(result, "Chi tiết")
                 }
-            )
-        },
-        modifier = modifier.fillMaxSize()
-    ) { innerPadding ->
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(Color(0xFFF8FAFC))
-                .verticalScroll(rememberScrollState())
-                .padding(bottom = innerPadding.calculateBottomPadding())
-        ) {
+            },
+            onClose = {
+                isScanningQr = false
+            }
+        )
+    } else {
+        Scaffold(
+            bottomBar = {
+                MainBottomNavigation(
+                    selectedTab = selectedTab,
+                    onTabSelected = { tabIndex ->
+                        selectedTab = tabIndex
+                        when (tabIndex) {
+                            1 -> onNavigateToRooms()
+                            2 -> onNavigateToInvoices()
+                            3 -> onNavigateToProfile()
+                        }
+                    },
+                    onQrClick = {
+                        isScanningQr = true
+                    }
+                )
+            },
+            modifier = modifier.fillMaxSize()
+        ) { innerPadding ->
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(Color(0xFFF8FAFC))
+                    .verticalScroll(rememberScrollState())
+                    .padding(bottom = innerPadding.calculateBottomPadding())
+            ) {
             // ==================== 1. TOP BANNER WALLPAPER ====================
             Box(
                 modifier = Modifier
@@ -257,6 +273,7 @@ fun MainDashboardScreen(
                 )
 
                 Spacer(modifier = Modifier.height(18.dp))
+            }
             }
         }
     }

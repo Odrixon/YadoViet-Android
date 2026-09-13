@@ -80,9 +80,8 @@ fun WebManageScreen(
     var currentUrl by remember { mutableStateOf(initialUrl) }
     var hasError by remember { mutableStateOf(false) }
 
-    // Dynamic Status Bar & Container Background Color (Default: #F1F5F9 for manage, #FFFFFF for terms/privacy)
-    val defaultBgColor = if (initialUrl.contains("/manage/")) Color(0xFFF1F5F9) else Color.White
-    var statusBarColor by remember { mutableStateOf(defaultBgColor) }
+    // Dynamic Status Bar & Container Background Color (Default: Color.White cho loading.html, offline.html và các trang quản lý có header trắng)
+    var statusBarColor by remember { mutableStateOf(Color.White) }
 
     // SideEffect to sync Android System Status Bar color dynamically with Web Background
     val window = (view.context as? Activity)?.window
@@ -330,28 +329,11 @@ fun WebManageScreen(
                 modifier = Modifier.background(Color.White)
             ) {
                 DropdownMenuItem(
-                    text = { Text("Tải lại trang", fontSize = 14.sp, fontWeight = FontWeight.Medium) },
+                    text = { Text("Tải lại", fontSize = 14.sp, fontWeight = FontWeight.Medium) },
                     onClick = {
                         showMenu = false
                         hasError = false
                         webView?.reload()
-                    }
-                )
-                DropdownMenuItem(
-                    text = { Text("Sao chép liên kết", fontSize = 14.sp, fontWeight = FontWeight.Medium) },
-                    onClick = {
-                        showMenu = false
-                        val clipboard = context.getSystemService(android.content.Context.CLIPBOARD_SERVICE) as android.content.ClipboardManager
-                        val clip = android.content.ClipData.newPlainText("URL", currentUrl)
-                        clipboard.setPrimaryClip(clip)
-                        Toast.makeText(context, "Đã sao chép liên kết", Toast.LENGTH_SHORT).show()
-                    }
-                )
-                DropdownMenuItem(
-                    text = { Text("Đóng", fontSize = 14.sp, fontWeight = FontWeight.SemiBold, color = Color(0xFFEF4444)) },
-                    onClick = {
-                        showMenu = false
-                        onCloseClick()
                     }
                 )
             }
