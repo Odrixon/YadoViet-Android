@@ -6,7 +6,7 @@ import androidx.activity.compose.setContent
 import com.odrixon.yadoviet.ui.screens.ForgetPasswordScreen
 import com.odrixon.yadoviet.ui.theme.YadoVietTheme
 import com.odrixon.yadoviet.utils.finishNoAnimation
-import com.odrixon.yadoviet.utils.startActivityNoAnimation
+import com.odrixon.yadoviet.utils.startActivityAndFinishNoAnimation
 
 class ForgetPasswordActivity : ComponentActivity() {
 
@@ -19,10 +19,8 @@ class ForgetPasswordActivity : ComponentActivity() {
                     onBackClick = {
                         finishNoAnimation()
                     },
-                    onSendOtpClick = { phone ->
-                        startActivityNoAnimation<OtpActivity> {
-                            putExtra("EXTRA_PHONE", phone)
-                        }
+                    onLoginClick = {
+                        startActivityAndFinishNoAnimation<LoginActivity>()
                     }
                 )
             }

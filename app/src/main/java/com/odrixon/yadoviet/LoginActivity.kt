@@ -21,6 +21,9 @@ class LoginActivity : ComponentActivity() {
                     },
                     onForgotPasswordClick = {
                         startActivityNoAnimation<ForgetPasswordActivity>()
+                    },
+                    onRegisterClick = {
+                        startActivityNoAnimation<RegisterActivity>()
                     }
                 )
             }

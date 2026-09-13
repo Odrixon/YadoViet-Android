@@ -23,12 +23,13 @@ class RegisterActivity : ComponentActivity() {
                     onLoginClick = {
                         startActivityAndFinishNoAnimation<LoginActivity>()
                     },
-                    onRegisterClick = { fullName, phone ->
+                    onRegisterSuccess = {
                         Toast.makeText(
                             this,
-                            "Tạo tài khoản thành công cho $fullName - $phone",
+                            "Khởi tạo tài khoản thành công!",
                             Toast.LENGTH_SHORT
                         ).show()
+                        startActivityAndFinishNoAnimation<LoginActivity>()
                     }
                 )
             }
