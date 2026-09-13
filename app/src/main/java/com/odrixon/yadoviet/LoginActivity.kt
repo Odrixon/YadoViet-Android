@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import com.odrixon.yadoviet.ui.screens.LoginScreen
 import com.odrixon.yadoviet.ui.theme.YadoVietTheme
 import com.odrixon.yadoviet.utils.finishNoAnimation
+import com.odrixon.yadoviet.utils.startActivityAndFinishNoAnimation
 import com.odrixon.yadoviet.utils.startActivityNoAnimation
 
 class LoginActivity : ComponentActivity() {
@@ -24,6 +25,9 @@ class LoginActivity : ComponentActivity() {
                     },
                     onRegisterClick = {
                         startActivityNoAnimation<RegisterActivity>()
+                    },
+                    onLoginSuccess = {
+                        startActivityAndFinishNoAnimation<MainActivity>()
                     }
                 )
             }

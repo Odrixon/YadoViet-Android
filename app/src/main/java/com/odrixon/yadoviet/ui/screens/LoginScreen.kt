@@ -23,7 +23,6 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.CheckboxDefaults
-import androidx.compose.material3.Divider
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -36,17 +35,13 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.SpanStyle
-import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
-import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.odrixon.yadoviet.R
@@ -67,6 +62,7 @@ fun LoginScreen(
     onBackClick: () -> Unit,
     onForgotPasswordClick: () -> Unit,
     onRegisterClick: () -> Unit = {},
+    onLoginSuccess: () -> Unit = {},
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
@@ -278,6 +274,7 @@ fun LoginScreen(
                         return@PrimaryPillButton
                     }
                     Toast.makeText(context, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show()
+                    onLoginSuccess()
                 }
             )
 
@@ -314,6 +311,7 @@ fun LoginScreen(
             GoogleLoginButton(
                 onClick = {
                     Toast.makeText(context, "Đang kết nối Google Sign-in...", Toast.LENGTH_SHORT).show()
+                    onLoginSuccess()
                 }
             )
 
